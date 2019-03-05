@@ -4,8 +4,6 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary()
     table.integer('eta_of_pickup')
     table.integer('estimated_price')
-    table.integer('passenger_id').notNullable()
-    table.foreign('passenger_id').references('passenger_info.id')
   })
   
 };
