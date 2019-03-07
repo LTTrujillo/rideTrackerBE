@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3001
+const port = 3006
 
 const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('./knexfile')[environment];
@@ -22,6 +22,17 @@ app.get('/uber', (req, res, next) => {
   knex('uber_info')
   .then((rows) => {
     res.send(rows);
+  })
+  .catch((err) => {
+    next(err);
+  });
+})
+
+
+app.post('/lyftRide', (req, res, next) => {
+  knex('lyft_info').insert(req.body)
+  .then((lyftData) => {
+    res.send(lyftData);
   })
   .catch((err) => {
     next(err);
