@@ -4,7 +4,7 @@ const port = 3001
 
 const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('./knexfile')[environment];
-const knex = require('knex')(knexConfig);\
+const knex = require('knex')(knexConfig);
 
 const cors = require('cors')
 const parser = require('body-parser')
