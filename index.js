@@ -28,7 +28,7 @@ app.get('/uber', (req, res, next) => {
 })
 
 app.post('/lyftRide', (req, res, next) => {
-  knex('lyft_info').insert(req.body, ["id", "eta_of_pickup", "estimated_price"])
+  knex('lyft_info').returning('*').insert(req.body, ["id", "eta_of_pickup", "estimated_price"])
   .then((lyftData) => {
     console.log("The lyftData", lyftData)
     res.status(200).send(lyftData);
@@ -39,9 +39,9 @@ app.post('/lyftRide', (req, res, next) => {
 })
 
 app.post('/uberRide', (req, res, next) => {
-  knex('uber_info').insert(req.body, ["id", "eta_of_pickup", "estimated_price"])
+  knex('uber_info').returning('*').insert(req.body, ["id", "eta_of_pickup", "estimated_price"])
     .then((uberData) => {
-      console.log(uberData)
+      console.log("uberData", uberData)
       res.status(200).send(uberData);
     })
     .catch((err) => {
@@ -50,9 +50,9 @@ app.post('/uberRide', (req, res, next) => {
 })
 
 app.post('/ride', (req, res, next) => {
-  knex('ride_info').insert(req.body)
+  knex('ride_info').returning('*').insert(req.body, ["id", "eta_of_pickup", "estimated_price"])
     .then((ride) => {
-      console.log(ride)
+      console.log("selectedRide", ride)
       res.status(200).send(ride);
     })
     .catch((err) => {

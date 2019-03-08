@@ -1,6 +1,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('ride_info', table => {
     table.increments('id').primary()
+    table.integer('eta_of_pickup')
+    table.decimal('estimated_price')
     table.string('pickup_address')
     table.string('dropoff_address')
     table.integer('pickup_lat')
@@ -9,7 +11,6 @@ exports.up = function(knex, Promise) {
     table.integer('dropoff_long')
     table.integer('uber_id').references('id').inTable('uber_info')
     table.integer('lyft_id').references('id').inTable('lyft_info')
-
   }) 
 };
 
